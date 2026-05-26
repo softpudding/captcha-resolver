@@ -1,0 +1,26 @@
+{
+  "correct_tiles": [
+    9,
+    10,
+    13,
+    14
+  ],
+  "forbidden_tiles": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    7,
+    8,
+    11,
+    12,
+    15
+  ],
+  "optional_tiles": [
+    5,
+    6
+  ],
+  "labeled": true,
+  "_note": "0-based row-major. Labeled via label_ui.py for 'bicycles'."
+}

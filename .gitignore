@@ -4,6 +4,9 @@
 # Run output: per-run screenshots, transcript.jsonl, result.json (large/local)
 runs/
 
+# Eval run records + per-run audit trails (the tasks/ fixtures ARE kept — they're the dataset)
+eval/results/
+
 # Python
 __pycache__/
 *.py[cod]

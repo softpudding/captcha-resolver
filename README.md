@@ -176,6 +176,10 @@ All settings are env-overridable (see `qwen_cua/config.py`). Common ones:
 | `QWEN_CUA_KEEP_IMAGES` | `2` | Recent screenshots kept in the model's context. |
 | `QWEN_CUA_SETTLE` | `0.6` | Seconds to wait after each action before observing. |
 | `QWEN_CUA_FAILSAFE` | `1` | Corner-slam abort (set `0` to disable). |
+| `QWEN_CUA_HUMAN` | `1` | Human-like input: randomized gaps + smooth, random-speed cursor (set `0` for instant/robotic). |
+| `QWEN_CUA_OP_GAP` / `QWEN_CUA_OP_GAP_JITTER` | `1.0` / `0.5` | Per-action gap = base + `uniform(0, jitter)` seconds. |
+| `QWEN_CUA_MOVE_MIN` / `QWEN_CUA_MOVE_MAX` | `0.35` / `0.85` | Cursor travel time range (eased, randomized). |
+| `QWEN_CUA_CLICK_JITTER` | `2` | Random click-point jitter in logical px (avoids pixel-exact clicks). |
 
 The model's coordinate convention (`[0,1000]` normalized grid, mapped to logical
 screen points) is handled internally — callers never deal with pixels.

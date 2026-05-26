@@ -1,0 +1,26 @@
+{
+  "correct_tiles": [
+    5,
+    8,
+    9,
+    13
+  ],
+  "forbidden_tiles": [
+    0,
+    1,
+    2,
+    3,
+    6,
+    7,
+    10,
+    11,
+    12,
+    14,
+    15
+  ],
+  "optional_tiles": [
+    4
+  ],
+  "labeled": true,
+  "_note": "0-based row-major. Labeled via label_ui.py for 'traffic lights'."
+}

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>reCAPTCHA replay (eval)</title>
+<style>
+  :root { --rc-blue:#4a90e2; --rc-green:#0b8043; --rc-red:#d93025; }
+  html,body { height:100%; margin:0; background:#fafafa;
+    font-family:'Roboto',-apple-system,Helvetica,Arial,sans-serif; color:#222; }
+  #root { min-height:100%; display:flex; align-items:center; justify-content:center; padding:40px 0; }
+
+  /* --- reCAPTCHA checkbox widget --- */
+  .rc-anchor { width:300px; height:74px; background:#f9f9f9; border:1px solid #d3d3d3;
+    border-radius:3px; box-shadow:0 0 4px 1px rgba(0,0,0,.08); display:flex; align-items:center;
+    padding:0 12px; box-sizing:border-box; }
+  .rc-cb { width:28px; height:28px; border:2px solid #c1c1c1; border-radius:2px; background:#fff;
+    cursor:pointer; flex:none; position:relative; transition:border-color .15s; }
+  .rc-cb.checking { border-color:transparent; }
+  .rc-cb.checking::after { content:""; position:absolute; inset:-2px; border:3px solid #4a90e2;
+    border-top-color:transparent; border-radius:50%; animation:spin .8s linear infinite; }
+  .rc-cb.checked { background:transparent; border-color:transparent; }
+  .rc-cb.checked::after { content:"✓"; position:absolute; inset:0; color:var(--rc-green);
+    font-size:30px; line-height:28px; text-align:center; font-weight:700; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .rc-label { margin-left:12px; font-size:14px; color:#000; flex:1; }
+  .rc-logo { text-align:center; font-size:10px; color:#9aa0a6; line-height:1.3; }
+  .rc-logo b { color:#5f6368; font-size:11px; }
+
+  /* --- image challenge widget --- */
+  .rc-challenge { width:auto; background:#fff; border-radius:3px; overflow:hidden;
+    box-shadow:0 2px 12px rgba(0,0,0,.25); }
+  .rc-head { background:var(--rc-blue); color:#fff; padding:12px 16px; }
+  .rc-head .desc { font-size:14px; } .rc-head .desc b { font-weight:700; font-size:17px; display:block; }
+  .rc-grid { display:grid; gap:3px; background:#fff; padding:8px; }
+  .rc-tile { position:relative; cursor:pointer; overflow:hidden; }
+  .rc-tile img { width:100%; height:100%; display:block; object-fit:cover; transition:opacity .4s; }
+  .rc-tile .mark { position:absolute; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(0,0,0,.05); }
+  .rc-tile.sel .mark { display:flex; }
+  .rc-tile.sel img { transform:scale(.78); transition:transform .15s; }
+  .rc-tile .mark::after { content:""; width:34px; height:34px; border-radius:50%; background:#fff;
+    box-shadow:0 0 3px rgba(0,0,0,.4); background-image:
+      linear-gradient(45deg,transparent 45%,var(--rc-blue) 45%,var(--rc-blue) 55%,transparent 55%); }
+  .rc-tile.sel .mark::after { content:"✓"; color:var(--rc-blue); font-size:26px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; background:#fff; }
+  .rc-tile.fading img { opacity:0; }
+  .rc-foot { display:flex; align-items:center; justify-content:space-between; padding:8px 12px;
+    border-top:1px solid #eee; }
+  .rc-icons { display:flex; gap:14px; font-size:20px; color:#9aa0a6; }
+  .rc-icons span { cursor:pointer; }
+  .rc-verify { background:var(--rc-blue); color:#fff; border:none; border-radius:3px;
+    padding:10px 22px; font-size:14px; cursor:pointer; }
+  .rc-verify:hover { filter:brightness(1.05); }
+  .rc-banner { color:var(--rc-red); font-size:13px; padding:6px 16px; min-height:18px; }
+
+  /* --- /sorry interstitial --- */
+  .sorry { max-width:680px; padding:0 24px; }
+  .sorry h1 { font-size:20px; font-weight:400; color:#202124; }
+  .sorry p { font-size:14px; color:#3c4043; line-height:1.6; }
+  .sorry .ip { color:#5f6368; font-size:12px; margin-top:24px; }
+
+  /* --- audio challenge --- */
+  .rc-audio { padding:20px; text-align:center; }
+  .rc-audio .hp { font-size:40px; }
+  .rc-audio input { margin-top:14px; padding:8px; width:80%; font-size:16px;
+    border:1px solid #ccc; border-radius:3px; }
+
+  /* --- success surface (search results / done) --- */
+  .results { max-width:640px; padding:0 24px; }
+  .results .logo { font-size:28px; font-weight:500; color:#4285f4; }
+  .results .r { margin:18px 0; } .results .r .t { color:#1a0dab; font-size:18px; }
+  .results .r .u { color:#006621; font-size:13px; } .results .r .s { color:#545454; font-size:13px; }
+  #solvedBanner { display:none; }
+</style>
+</head>
+<body>
+  <div id="root">loading…</div>
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "correct_tiles": [
+    0,
+    4,
+    5,
+    9
+  ],
+  "forbidden_tiles": [
+    1,
+    2,
+    3,
+    6,
+    7,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "optional_tiles": [
+    8,
+    10
+  ],
+  "labeled": true,
+  "_note": "0-based row-major. Labeled via label_ui.py for 'stairs'."
+}

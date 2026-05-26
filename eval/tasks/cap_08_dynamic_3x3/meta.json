@@ -1,0 +1,14 @@
+{
+  "case_id": "cap_08_dynamic_3x3",
+  "captured_at": "2026-05-26T05:17:37.219056+00:00",
+  "source": "https://www.google.com/recaptcha/api2/demo",
+  "instruction": "Select all images with crosswalks Click verify once there are none left.",
+  "target_word": "crosswalks",
+  "rows": 3,
+  "cols": 3,
+  "n_tiles": 9,
+  "dynamic": true,
+  "mode": "dynamic",
+  "skip_when_none": false,
+  "has_audio_fallback": true
+}

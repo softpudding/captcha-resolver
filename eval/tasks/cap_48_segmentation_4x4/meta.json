@@ -1,0 +1,14 @@
+{
+  "case_id": "cap_48_segmentation_4x4",
+  "captured_at": "2026-05-26T07:35:55.083299+00:00",
+  "source": "https://www.google.com/recaptcha/api2/demo",
+  "instruction": "Select all squares with traffic lights If there are none, click skip",
+  "target_word": "traffic lights",
+  "rows": 4,
+  "cols": 4,
+  "n_tiles": 16,
+  "dynamic": false,
+  "mode": "segmentation",
+  "skip_when_none": true,
+  "has_audio_fallback": true
+}

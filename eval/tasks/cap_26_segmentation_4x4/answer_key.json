@@ -1,0 +1,26 @@
+{
+  "correct_tiles": [
+    2,
+    6,
+    10
+  ],
+  "forbidden_tiles": [
+    0,
+    4,
+    8,
+    12,
+    13,
+    15
+  ],
+  "optional_tiles": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    14
+  ],
+  "labeled": true,
+  "_note": "0-based row-major 4x4. Clear 'motorcycles' tiles = correct_tiles; clearly-empty = forbidden_tiles; ambiguous edges = optional_tiles."
+}

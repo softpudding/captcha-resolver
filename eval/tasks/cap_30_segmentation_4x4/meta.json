@@ -1,0 +1,14 @@
+{
+  "case_id": "cap_30_segmentation_4x4",
+  "captured_at": "2026-05-26T07:35:06.278878+00:00",
+  "source": "https://www.google.com/recaptcha/api2/demo",
+  "instruction": "Select all squares with buses If there are none, click skip",
+  "target_word": "buses",
+  "rows": 4,
+  "cols": 4,
+  "n_tiles": 16,
+  "dynamic": false,
+  "mode": "segmentation",
+  "skip_when_none": true,
+  "has_audio_fallback": true
+}

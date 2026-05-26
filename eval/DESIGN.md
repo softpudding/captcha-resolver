@@ -82,7 +82,16 @@ each result record so a failure can be inspected step-by-step, and we derive the
 are **not** writing separate step-by-step LLM scorers on day one — the cheap
 structured diagnostics cover "where did it go wrong" for this agent.
 
-## Decision 4 — Dataset: 10 real Google reCAPTCHA cases
+## Decision 4 — Dataset: 20 real Google reCAPTCHA cases
+
+The first 10 cases (below) cover one example of each variant. A second block of
+10 (cases 11–20, all `seg_*`) deliberately over-samples the **4×4 segmentation**
+variant — one photo sliced into 16 squares, where the agent must reason about
+which squares a *single continuous object* spills into. This is distinct from
+the `static` 3×3 grids, where each tile is an independent thumbnail: the agent
+underperforms on segmentation, so it gets denser coverage (stairs, buses,
+bicycles, motorcycles, traffic lights, plus skip-none / retry / multiround
+variants). See the second table.
 
 Collected live from Google, categorized by the variant Google served. Target
 lineup (actual set depends on what capture yields; repeats of a type with a
@@ -100,6 +109,26 @@ different object class still count as distinct cases):
 | 8 | `grid_multiround` | solve grid → a second grid appears → solve | multi-round persistence |
 | 9 | `sorry_interstitial` | "unusual traffic" /sorry page wrapping a checkbox | end-to-end fidelity |
 | 10 | `audio_unsolvable` | audio-only challenge (vision agent can't hear) | honest give-up (inverted scoring) |
+
+### Segmentation block (cases 11–20)
+
+One photo split into a 4×4 grid; "Select all **squares** with X". Targets a
+known weak spot: spatial reasoning over a single object spanning many tiles
+(incl. ambiguous edge squares, which are labeled `optional` and ignored by the
+scorer). 7 plain + 3 harder variants.
+
+| # | case_id | Object / variant | fixture |
+| --- | --- | --- | --- |
+| 11 | `11_seg_stairs_a` | stairs (steps up the right side) | cap_39 |
+| 12 | `12_seg_stairs_b` | stairs (stone steps, diagonal) | cap_44 |
+| 13 | `13_seg_buses_a` | bus (city bus, rear-3/4) | cap_30 |
+| 14 | `14_seg_buses_b` | bus (white coach, head-on) | cap_45 |
+| 15 | `15_seg_bicycles` | bicycle (rider, side-on) | cap_43 |
+| 16 | `16_seg_motorcycles` | motorcycle (front-wheel close-up) | cap_17 |
+| 17 | `17_seg_traffic_lights` | traffic light (on a pole) | cap_48 |
+| 18 | `18_seg_skip_none` | skip — fire hydrants absent in the photo | cap_26 |
+| 19 | `19_seg_retry_bicycles` | retry — first verify rejected, must persist | cap_08 |
+| 20 | `20_seg_multiround` | motorcycles grid → traffic-lights grid | cap_06 + cap_09 |
 
 ## Pass bar
 

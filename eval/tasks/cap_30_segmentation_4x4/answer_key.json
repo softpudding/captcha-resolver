@@ -1,0 +1,25 @@
+{
+  "correct_tiles": [
+    6,
+    7,
+    10,
+    11,
+    14,
+    15
+  ],
+  "forbidden_tiles": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    8,
+    9,
+    12,
+    13
+  ],
+  "optional_tiles": [],
+  "labeled": true,
+  "_note": "0-based row-major. Labeled via label_ui.py for 'buses'."
+}

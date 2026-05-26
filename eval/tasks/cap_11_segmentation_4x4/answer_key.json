@@ -1,5 +1,26 @@
 {
-  "correct_tiles": [],
-  "labeled": false,
-  "_note": "View grid.png. List 0-based indices (row-major, 4x4) of tiles matching: 'buses'."
+  "correct_tiles": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10
+  ],
+  "forbidden_tiles": [
+    3,
+    7,
+    11,
+    15
+  ],
+  "optional_tiles": [
+    12,
+    13,
+    14
+  ],
+  "labeled": true,
+  "_note": "0-based row-major. Labeled via label_ui.py for 'buses'."
 }

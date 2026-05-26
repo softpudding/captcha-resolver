@@ -1,5 +1,18 @@
 {
-  "correct_tiles": [],
-  "labeled": false,
-  "_note": "View grid.png. List 0-based indices (row-major, 3x3) of tiles matching: 'bicycles'."
+  "correct_tiles": [
+    0,
+    1,
+    8
+  ],
+  "forbidden_tiles": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "optional_tiles": [],
+  "labeled": true,
+  "_note": "0-based row-major. Labeled via label_ui.py for 'bicycles'."
 }

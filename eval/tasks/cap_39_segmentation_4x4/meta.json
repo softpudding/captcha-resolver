@@ -1,0 +1,14 @@
+{
+  "case_id": "cap_39_segmentation_4x4",
+  "captured_at": "2026-05-26T07:35:30.369258+00:00",
+  "source": "https://www.google.com/recaptcha/api2/demo",
+  "instruction": "Select all squares with stairs If there are none, click skip",
+  "target_word": "stairs",
+  "rows": 4,
+  "cols": 4,
+  "n_tiles": 16,
+  "dynamic": false,
+  "mode": "segmentation",
+  "skip_when_none": true,
+  "has_audio_fallback": true
+}

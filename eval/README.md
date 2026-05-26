@@ -7,15 +7,16 @@ solve them, then reads an **independent page oracle** to score the outcome —
 separately from what the agent *claims*.
 
 Read `DESIGN.md` first: it explains the four design decisions (capture-and-replay
-sim env, static oracle scoring, result-primary with trace kept, the 10-case
-dataset) in plain terms. This README is the operational how-to.
+sim env, static oracle scoring, result-primary with trace kept, the dataset)
+in plain terms. This README is the operational how-to.
 
 ## Layout
 
 ```
 eval/
   DESIGN.md            design rationale (read first)
-  cases.jsonl          the 10 cases, as data — one JSON object per line
+  cases.jsonl          the cases, as data — one JSON object per line
+                       (1–10 = one of each variant; 11–20 = 4×4 segmentation)
   capture_recaptcha.py captures real Google challenges -> tasks/ fixtures
   tasks/<fixture>/      captured fixture: meta.json, grid.png, tiles/NN.png
   replay/              index.html + app.js: faithful reCAPTCHA replica + oracle
@@ -66,10 +67,18 @@ steps/latency. Full per-dimension records (+ the agent's audit trail under
 ## Adding a case
 
 1. Capture more real challenges: `PYTHONPATH=. .venv/bin/python eval/capture_recaptcha.py --max 12`.
-   New fixtures land in `tasks/`.
-2. **Label the answer key** by viewing `tasks/<fixture>/grid.png` and deciding,
-   for each tile (row-major, 0-based): is it clearly the object (`required`),
-   clearly not (`forbidden`), or ambiguous (`optional`)?
+   New fixtures land in `tasks/`. Add `--keep-all --out <dir>` to harvest *many*
+   distinct photos (the default collapses repeats of the same object by signature);
+   pick the clearest into `tasks/`.
+2. **Label the tiles** with the browser UI: `PYTHONPATH=. .venv/bin/python
+   eval/label_ui.py`, open the printed URL, and click each tile to cycle
+   `required` (clearly the object) → `forbidden` (clearly not) → `optional`
+   (ambiguous edge). Save writes straight back into the round in `cases.jsonl`
+   (and mirrors the fixture's `answer_key.json`). It lists every grid round, so
+   it doubles as the tool for *fixing* existing labels, and auto-syncs any rounds
+   that show the same fixture for the same target (e.g. a static grid that also
+   appears inside a multiround case) so their labels never drift. (`_annotate_grid.py
+   <fixture_dir>` is a static fallback that just overlays a numbered grid.)
 3. Add a line to `cases.jsonl` referencing the fixture and your tile sets. Pick
    a `kind`: `grid`, `dynamic`, `retry`, `multiround`, `skip`, `checkbox`,
    `interstitial`, or `audio`.

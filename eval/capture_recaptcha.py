@@ -194,6 +194,10 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--max", type=int, default=14, help="Max challenges to attempt to capture.")
     ap.add_argument("--out", default="eval/tasks", help="Fixture output directory.")
+    ap.add_argument("--keep-all", action="store_true",
+                    help="Keep every captured challenge as its own fixture (don't collapse "
+                         "different photos of the same object by signature). Useful for "
+                         "harvesting many distinct segmentation photos.")
     ap.add_argument("--user-data-dir", default="/tmp/qwen-cua-capture")
     args = ap.parse_args()
 
@@ -218,7 +222,7 @@ def main() -> int:
             meta = capture_one(page, out, captured + 1)
             if meta:
                 sig = f"{meta['mode']}|{meta['target_word'].lower()}|{meta['rows']}x{meta['cols']}"
-                if sig not in seen_signatures:
+                if args.keep_all or sig not in seen_signatures:
                     seen_signatures.add(sig)
                     captured += 1
                 else:

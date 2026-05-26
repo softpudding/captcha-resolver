@@ -1,0 +1,21 @@
+[project]
+name = "qwen-captcha-solver"
+version = "0.1.0"
+description = "OS-level computer-use agent driven by a local Qwen3.6-35B-A3B VL model, for solving browser CAPTCHAs."
+requires-python = ">=3.10"
+dependencies = [
+    "openai>=1.40",
+    "pillow>=10.0",
+    "pyautogui>=0.9.54",
+    "playwright>=1.40",
+]
+
+[project.scripts]
+qwen-cua = "qwen_cua.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["qwen_cua"]

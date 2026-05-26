@@ -1,0 +1,15 @@
+# Virtual environment
+.venv/
+
+# Run output: per-run screenshots, transcript.jsonl, result.json (large/local)
+runs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# OS
+.DS_Store

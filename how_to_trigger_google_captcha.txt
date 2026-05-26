@@ -1,0 +1,41 @@
+    If you want to deliberately trigger Google's reCAPTCHA (the google.com/sorry/index page
+    that says "Our systems have detected unusual traffic from your computer network"),
+    here's what causes it:
+
+    The core cause: automated, high-rate searching from one IP
+
+    Google watches for traffic that doesn't look human. The reliable way to trip it:
+
+    1. Send many search requests in a short time. This is the dominant factor. Dozens of
+    google.com/search requests within a minute or two from the same IP will do it. (In our
+    case, ~75 searches in a few minutes triggered it hard.)
+    2. No delay between requests. Fire them back-to-back with no pause. Human searches have
+    natural gaps; machine-gun requests with identical timing are an obvious bot signal.
+    3. Page through results aggressively. Requesting many result pages (via the &start=
+    offset / high &num=) multiplies your request count fast — e.g., asking for "30 results"
+    can mean 3–4 page-loads per query.
+    4. Run requests concurrently. Multiple parallel request streams from the same IP
+    compound the burst.
+
+    Things that make it trip sooner
+
+    - An automation-driven browser (Selenium/Playwright/Chrome DevTools Protocol, headless
+    Chrome). Google detects automation fingerprints and is quicker to challenge them.
+    - A datacenter/VPN/shared IP rather than a residential one.
+    - A previously-flagged IP. Once you've tripped it, that IP stays "hot" for a while, so
+    subsequent runs trigger it much faster — even gentle ones.
+
+    Important caveats
+
+    - There's no published threshold. Google's detection is adaptive — no fixed "N requests
+    = block" number. It depends on your IP's reputation, history, timing patterns, and
+    current conditions.
+    - It's IP/network-level, not per-tab. Once the CAPTCHA appears, every further Google
+    request from that machine makes things worse.
+    - Normal manual searching almost never triggers it — you typically need
+    scripted/scraping behavior to reach the volume and regularity that looks robotic.
+
+    Simplest recipe to reproduce: write a short script that loops a Google search URL
+    (varying the query and paging through &start=10,20,30…) as fast as possible, several
+    dozen times in a row — ideally from an automation framework. The /sorry reCAPTCHA will
+    appear, showing your IP address and a timestamp.

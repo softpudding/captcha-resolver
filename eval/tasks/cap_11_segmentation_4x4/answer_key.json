@@ -1,0 +1,5 @@
+{
+  "correct_tiles": [],
+  "labeled": false,
+  "_note": "View grid.png. List 0-based indices (row-major, 4x4) of tiles matching: 'buses'."
+}

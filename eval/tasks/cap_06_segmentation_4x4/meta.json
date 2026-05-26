@@ -1,0 +1,14 @@
+{
+  "case_id": "cap_06_segmentation_4x4",
+  "captured_at": "2026-05-26T05:17:26.549599+00:00",
+  "source": "https://www.google.com/recaptcha/api2/demo",
+  "instruction": "Select all squares with motorcycles",
+  "target_word": "motorcycles",
+  "rows": 4,
+  "cols": 4,
+  "n_tiles": 16,
+  "dynamic": false,
+  "mode": "segmentation",
+  "skip_when_none": false,
+  "has_audio_fallback": true
+}

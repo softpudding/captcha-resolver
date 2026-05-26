@@ -42,6 +42,20 @@ class Config:
     # the UI settle (animations, page repaint).
     settle_seconds: float = float(os.environ.get("QWEN_CUA_SETTLE", "0.6"))
 
+    # --- Human-like input ---
+    # Robotic, instant, evenly-timed input is a classic bot fingerprint. When
+    # enabled, each action waits a randomized gap before acting and the cursor
+    # glides with smooth easing at a randomized speed.
+    human_like: bool = os.environ.get("QWEN_CUA_HUMAN", "1") != "0"
+    # Inter-operation gap = op_gap_base + uniform(0, op_gap_jitter) seconds.
+    op_gap_base: float = float(os.environ.get("QWEN_CUA_OP_GAP", "1.0"))
+    op_gap_jitter: float = float(os.environ.get("QWEN_CUA_OP_GAP_JITTER", "0.5"))
+    # Cursor travel time is drawn uniformly from [move_dur_min, move_dur_max] s.
+    move_dur_min: float = float(os.environ.get("QWEN_CUA_MOVE_MIN", "0.35"))
+    move_dur_max: float = float(os.environ.get("QWEN_CUA_MOVE_MAX", "0.85"))
+    # Small random click-point jitter (logical px) so clicks aren't pixel-exact.
+    click_jitter_px: int = int(os.environ.get("QWEN_CUA_CLICK_JITTER", "2"))
+
     # --- Safety ---
     # pyautogui failsafe: slamming the mouse into a screen corner aborts.
     failsafe: bool = os.environ.get("QWEN_CUA_FAILSAFE", "1") != "0"
